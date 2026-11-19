@@ -84,15 +84,21 @@ body{margin:0;background:#F6F3EE}
 .proc{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;padding-bottom:128px}
 .proc-h h2{font-size:clamp(34px,3.4vw,52px);line-height:1.08}
 .proc-h p{margin:16px 0 28px;color:var(--muted);font-size:15px;line-height:1.6;max-width:34ch}
-.rows{border-top:1px solid var(--line)}
-.row{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.4fr) 28px;gap:20px;align-items:center;padding:26px 20px;border-bottom:1px solid var(--line);border-radius:0;position:relative;transition:background-color 200ms var(--std),color 200ms var(--std),border-radius 200ms var(--std)}
-.row .n{font:400 18px/1 var(--font-display),Georgia,serif;color:var(--muted);transition:color 200ms var(--std)}
+.rows{border-top:1px solid var(--line);transition:border-color 180ms var(--in)}
+.row{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.4fr) 28px;gap:20px;align-items:center;padding:26px 20px;border-bottom:1px solid var(--line);position:relative;isolation:isolate;transition:color 180ms var(--in),border-color 180ms var(--in)}
+.row .n{font:400 18px/1 var(--font-display),Georgia,serif;color:var(--muted);transition:color 180ms var(--in)}
 .row h3{font:400 26px/1.15 var(--font-display),Georgia,serif}
-.row p{font-size:14.5px;line-height:1.55;color:var(--muted);transition:color 200ms var(--std)}
-.row svg{opacity:.35;transform:translateX(-4px);transition:opacity 200ms var(--std),transform 200ms var(--in)}
-.row:hover{background:var(--deep);color:#fff;border-radius:12px;border-bottom-color:transparent}
-.row:hover .n,.row:hover p{color:rgba(255,255,255,.72)}
-.row:hover svg{opacity:1;transform:none;transition:opacity 200ms var(--std),transform 280ms var(--out)}
+.row p{font-size:14.5px;line-height:1.55;color:var(--muted);transition:color 180ms var(--in)}
+.row svg{opacity:.35;transform:translateX(-4px);transition:opacity 180ms var(--in),transform 180ms var(--in)}
+/* Process row hover: one calm move. A rounded deep panel fades and settles in behind the row
+   (240ms ease-out in, 180ms ease-in out); text and the neighbouring hairlines change in step. */
+.row::before{content:"";position:absolute;inset:0 0 -1px;z-index:-1;border-radius:12px;background:var(--deep);opacity:0;transform:scale(.985);transition:opacity 180ms var(--in),transform 180ms var(--in)}
+.row:hover{color:#fff;border-bottom-color:transparent;transition:color 240ms var(--out),border-color 240ms var(--out)}
+.row:hover::before{opacity:1;transform:none;transition:opacity 240ms var(--out),transform 240ms var(--out)}
+.row:hover .n,.row:hover p{color:rgba(255,255,255,.72);transition:color 240ms var(--out)}
+.row:hover svg{opacity:1;transform:none;transition:opacity 240ms var(--out),transform 240ms var(--out)}
+.row:has(+ .row:hover){border-bottom-color:transparent;transition:border-color 240ms var(--out)}
+.rows:has(> .row:first-child:hover){border-top-color:transparent;transition:border-color 240ms var(--out)}
 
 /* ---------- categories (rounded cards) ---------- */
 .cats-sec{padding-bottom:128px}
@@ -190,7 +196,7 @@ body{margin:0;background:#F6F3EE}
   .row{grid-template-columns:36px minmax(0,1fr) 20px;gap:8px 12px;padding:20px 4px}
   .row p{grid-column:2 / 3}
   .row svg{grid-row:1;grid-column:3}
-  .row:hover{padding-inline:12px}
+  .row::before{inset:0 -10px -1px}
   .cats-sec{padding-bottom:88px}
   .sec-head .pill{display:none}
   .cards{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--g);margin-inline:calc(var(--g) * -1);padding-inline:var(--g);scrollbar-width:none}
@@ -216,6 +222,8 @@ body{margin:0;background:#F6F3EE}
   .ft-base{margin-top:56px;flex-direction:column}
 }
 @media (prefers-reduced-motion: reduce){
+  .row::before,.row:hover::before{transform:none}
+  .row svg{transform:none}
   html{scroll-behavior:auto}
   .top,.top[data-hidden]{transition:none}
   .room,.room>img,.ln>span,.rise{animation:none}
