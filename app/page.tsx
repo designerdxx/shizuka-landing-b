@@ -2,6 +2,7 @@
 import type { CSSProperties } from "react";
 import { asset } from "./asset";
 import { categories, messageHref, reviews, socials, steps } from "./content";
+import { Faq } from "./_components/Faq";
 import { Header } from "./_components/Header";
 import { HeroReady } from "./_components/HeroReady";
 import { Reveal } from "./_components/Reveal";
@@ -205,13 +206,18 @@ export default function Home() {
             <h2 className="gar" id="rev-h" data-r="">
               What clients say after a private sale.
             </h2>
+            <p className="rev-note" data-r="" style={d(40)}>
+              Sample reviews, shown for layout.
+            </p>
             <div className="rev-grid">
               {reviews.map((r, n) => (
                 <figure className={n === 0 ? "rq on" : "rq"} style={{ margin: 0, ...d(n * 40) }} data-r="" key={r.item}>
                   <blockquote>{r.quote}</blockquote>
                   <p>
-                    <b>{r.name}</b>
-                    {r.item}
+                    <span>
+                      <b>{r.name}</b>
+                      {r.item}
+                    </span>
                   </p>
                 </figure>
               ))}
@@ -219,20 +225,35 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="faq" id="faq" aria-labelledby="faq-h">
+          <div className="faq-h" data-r="">
+            <h2 className="gar" id="faq-h">
+              Questions, answered.
+            </h2>
+            <p>Straight answers about valuation, collection and payment. Anything else, ask us on WhatsApp.</p>
+            <a className="pill pill-line" href={messageHref}>
+              Ask on WhatsApp
+            </a>
+          </div>
+          <Faq />
+        </section>
+
         <section className="wrap cta" aria-labelledby="cta-h">
-          <h2 className="gar" id="cta-h" data-r="">
-            Start your <em style={{ fontStyle: "italic" }}>private</em> sale.
-          </h2>
-          <p data-r="" style={d(40)}>
-            Send a few photographs and get a valuation range. Our buyers are waiting to bid on your piece.
-          </p>
-          <div className="acts" data-r="" style={d(80)}>
-            <a className="pill pill-dark" href={messageHref}>
-              Message us on WhatsApp
-            </a>
-            <a className="pill pill-line" href="#contact">
-              Read the FAQs
-            </a>
+          <div className="cta-in">
+            <h2 className="gar" id="cta-h" data-r="">
+              Start your <em style={{ fontStyle: "italic" }}>private</em> sale.
+            </h2>
+            <p data-r="" style={d(40)}>
+              Send a few photographs and get a valuation range. Our buyers are waiting to bid on your piece.
+            </p>
+            <div className="acts" data-r="" style={d(80)}>
+              <a className="pill pill-dark" href={messageHref}>
+                Message us on WhatsApp
+              </a>
+              <a className="pill pill-line" href="#faq">
+                Read the FAQs
+              </a>
+            </div>
           </div>
         </section>
       </main>
@@ -243,7 +264,7 @@ export default function Home() {
             <a href="#how">How it works</a>
             <a href="#buy">What we buy</a>
             <a href="#about">About us</a>
-            <a href="#contact">FAQs</a>
+            <a href="#faq">FAQs</a>
           </nav>
           <div className="acts">
             <a className="pill pill-light" href={messageHref}>

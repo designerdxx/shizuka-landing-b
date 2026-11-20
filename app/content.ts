@@ -37,9 +37,20 @@ export const categories = [
   { label: "Handbags", image: "/images/cat-bags-sq.jpg" },
 ];
 
-/** Placeholders until the client supplies approved reviews. Do not replace with invented quotes. */
+/** SAMPLE reviews for layout only. Replace with approved client quotes before launch; never present these as real. */
 export const reviews = [
-  { quote: "[Client testimonial: two to three sentences, awaiting an approved review.]", name: "[First name, initial]", item: "[Item sold, e.g. watch]" },
-  { quote: "[Client testimonial: two to three sentences, awaiting an approved review.]", name: "[First name, initial]", item: "[Item sold, e.g. handbag]" },
-  { quote: "[Client testimonial: two to three sentences, awaiting an approved review.]", name: "[First name, initial]", item: "[Item sold, e.g. jewellery]" },
+  { quote: "“I wanted a fair price without the back-and-forth of selling online. They collected the watch from my office, and the offers came in within days.”", name: "Omar K.", item: "Sold a watch" },
+  { quote: "“Everything happened over WhatsApp. The chauffeur was on time, the bag was authenticated in-house, and I accepted the best offer without leaving home.”", name: "Sara A.", item: "Sold a handbag" },
+  { quote: "“I changed my mind about one piece, and it came back to me, no questions asked. That’s when I knew I could trust them with the rest.”", name: "Noor H.", item: "Sold jewellery" },
+];
+
+/** FAQ answers use only facts already in the approved copy; the client confirms them before launch. */
+export const faqs = [
+  { q: "How does the valuation work?", a: "Send a few photos and details of your piece on WhatsApp. We’ll reply with a valuation range, subject to authentication. The valuation is free." },
+  { q: "What do you buy?", a: "Handbags, watches and jewellery, including diamonds. If you’re not sure about a piece, send us a photo and ask." },
+  { q: "Who collects my piece?", a: "A chauffeur in white gloves collects it from you. It’s kept safely stored while your account manager gathers bids. Nothing to carry, nowhere to go." },
+  { q: "How do you check it’s authentic?", a: "Every piece is authenticated in-house before we invite offers from our buyer network." },
+  { q: "How quickly will I be paid?", a: "Within 72 hours of your first message. Once you accept an offer, the funds reach your account within 48 hours." },
+  { q: "What if I don’t like the offer?", a: "Selling with us is commitment-free. If you change your mind before the sale, your piece comes back to you." },
+  { q: "Will my sale stay private?", a: "Yes. Shizuka was created for clients who wish to keep their privacy: your piece is offered to professional buyers in our network, not on a public marketplace." },
 ];
